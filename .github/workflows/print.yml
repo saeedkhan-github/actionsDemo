@@ -1,0 +1,20 @@
+name: Print Secret Demo
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  print-secret:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print environment variable
+        env:
+          # For repository variables
+          MY_VAR: ${{ vars.SECRETVARIABLEONE }}
+          # For repository secrets
+          MY_SECRET: ${{ secrets.SECRETONE }}
+        run: |
+          echo "The variable value is: $MY_VAR"
+          echo "The secret value is: $MY_SECRET"
